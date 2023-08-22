@@ -2,8 +2,17 @@ import styled from "styled-components";
 import Leftside from "./Leftside";
 import Main from "./Main";
 import Rightside from "./Rightside";
+import { connect } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
-const Home = () => {
+
+const Home = (props) => {
+  const navigate = useNavigate();
+  // Redirect to login page if user is not authenticated
+  if (!props.user) {
+    navigate("/");
+  }
+
   return (
     <Container>
       <Section>
@@ -78,4 +87,10 @@ const Layout = styled.div`
 `;
 
 
-export default Home
+const mapStateToProps = (state) => {
+  return {
+    user: state.userState.user,
+  };
+};
+
+export default connect(mapStateToProps)(Home);

@@ -1,31 +1,42 @@
 import styled from "styled-components";
+import { connect } from "react-redux";
+import { signInAPI } from "../actions";
+import { useNavigate } from "react-router-dom";
 
 const Login = (props) => {
-    return (
-        <Container>
-            <Nav>
-                <a href="/">
-                    <img src="/images/login-logo.svg" alt="" />
-                </a>
-                <div>
-                    <Join>Join now</Join>
-                    <SignIn>Sign in</SignIn>
-                </div>
-            </Nav>
-            <Section>
-                <Hero>
-                    <h1>Welcome to your professional community</h1>
-                    <img src="/images/login-hero.svg" alt="" />
-                </Hero>
-                <Form>
-                    <Google>
-                        <img src="/images/google.svg" alt="" />
-                        Sign in with Google
-                    </Google>
-                </Form>
-            </Section>
-        </Container>
-    );
+  const navigate = useNavigate(); // Initialize useNavigate
+
+  // Check if the user is already signed in and navigate to home
+  if (props.user) {
+    navigate("/home");
+  }
+
+  return (
+    <Container>
+
+      <Nav>
+        <a href="/">
+          <img src="/images/login-logo.svg" alt="" />
+        </a>
+        <div>
+          <Join>Join now</Join>
+          <SignIn>Sign in</SignIn>
+        </div>
+      </Nav>
+      <Section>
+        <Hero>
+          <h1>Welcome to your professional community</h1>
+          <img src="/images/login-hero.svg" alt="" />
+        </Hero>
+        <Form>
+          <Google onClick={() => props.signIn()}>
+            <img src="/images/google.svg" alt="" />
+            Sign in with Google
+          </Google>
+        </Form>
+      </Section>
+    </Container>
+  );
 };
 
 const Container = styled.div`
@@ -165,5 +176,15 @@ display: flex;
     color: rgba(0, 0, 0, 0.75);
   }
 `;
+const mapStateToProps = (state) => {
+  return {
+    user: state.userState.user,
+  };
+};
+const mapDispatchToProps = (dispatch) => ({
+  signIn: () => dispatch(signInAPI()),
+});
 
-export default Login;
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
+
+// export default Login;

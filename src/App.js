@@ -1,4 +1,6 @@
 import React from 'react';
+import { useEffect } from "react";
+import { getUserAuth } from "./actions";
 // Styles
 import './App.css';
 import Header from './components/Header';
@@ -9,8 +11,14 @@ import Login from './components/Login'
 
 // External Imports
 import { Routes, Route } from "react-router-dom";
+import { connect } from 'react-redux';
 
-const App = () => {
+const App = (props) => {
+
+  useEffect(() => {
+    props.getUserAuth();
+  }, []);
+
   return (
     <div className="App">
 
@@ -23,4 +31,12 @@ const App = () => {
   );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+	return {};
+};
+
+const mapDispatchToProps = (dispatch) => ({
+	getUserAuth: () => dispatch(getUserAuth()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

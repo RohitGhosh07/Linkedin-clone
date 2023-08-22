@@ -11,17 +11,19 @@ import './index.css';
 // Components
 import App from './App';
 
-// import { Provider } from "react-redux";
-// import store from "./store";
+import { Provider } from "react-redux";
+import store from "./store";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      {/* <Provider store={store}> */}
+    <Provider store={store}>
+      <BrowserRouter>
+
         <App />
-      {/* </Provider> */}
-    </BrowserRouter>
+
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>
 );
 
