@@ -1,4 +1,5 @@
 # LinkedIn Clone in React
+![YouTube Logo](https://i.ibb.co/pQNpvSn/Linked-In-Clone-Elevate-Your-Career.png)
 
 Welcome to my LinkedIn Clone project! This is a web application built using React that replicates some of the features and functionality of the LinkedIn platform.
 
